@@ -48,13 +48,19 @@ def convert_numbers(list_of_strings):
     # ...then convert each substring into a number
     return [float(number_string) for number_string in all_numbers]
 
-
+from argparse import ArgumentParser
 if __name__ == "__main__":
-    with open("numbers.txt", "r") as numbers_file:
+    parser = ArgumentParser(description="Pass values from the command line")
+    parser.add_argument('numbers')
+    parser.add_argument('weights')
+    arguments= parser.parse_args()
+    
+    with open(arguments.numbers + ".txt", "r") as numbers_file:
         numbers_strings = numbers_file.readlines()
     # TODO Can we make this optional, so that we don't need a weights file?
-    with open("weights.txt", "r") as weights_file:
-        weight_strings = weights_file.readlines()
+    with open(arguments.weights + ".txt", "r") as weights_file:
+       weight_strings = weights_file.readlines()
+
     numbers = convert_numbers(numbers_strings)
     weights = convert_numbers(weight_strings)
     # TODO Can we add the option of computing the square root of this result?
