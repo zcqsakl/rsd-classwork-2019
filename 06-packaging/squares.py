@@ -8,6 +8,7 @@ def average_of_squares(list_of_numbers, list_of_weights=None):
     by the list_of_weights argument.
 
     Example:
+    # documentation string
     -------
     >>> average_of_squares([1, 2, 4])
     7.0
@@ -28,7 +29,7 @@ def average_of_squares(list_of_numbers, list_of_weights=None):
         for number, weight
         in zip(list_of_numbers, effective_weights)
     ]
-    return sum(squares)
+    return sum(squares)/len(list_of_numbers)
 
 
 def convert_numbers(list_of_strings):
@@ -38,7 +39,7 @@ def convert_numbers(list_of_strings):
     Example:
     -------
     >>> convert_numbers(["4", " 8 ", "15 16", " 23    42 "])
-    [4, 8, 15, 16]
+    [4, 8, 15, 16, 23, 42]
     """
     all_numbers = []
     for s in list_of_strings:
@@ -46,7 +47,10 @@ def convert_numbers(list_of_strings):
         # whitespace, and collect them into a single list...
         all_numbers.extend([token.strip() for token in s.split()])
     # ...then convert each substring into a number
-    return [float(number_string) for number_string in all_numbers]
+    return [int(number_string) for number_string in all_numbers]
+
+    # fixed bug by returning integers and not floats
+    # fixed bug added 23, 42 in the expected
 
 from argparse import ArgumentParser
 if __name__ == "__main__":
@@ -67,3 +71,12 @@ if __name__ == "__main__":
     result = average_of_squares(numbers, weights)
     # TODO Can we write the result in a file instead of printing it?
     print(result)
+
+
+# modularity
+# flexibility
+# automation
+# user friendly
+
+# Documentation tests: before removing the bug, it wasn't dividing by the number of elements
+# eg getting 21 instead of 7
